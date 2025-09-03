@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Harris  - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --background: #f9f9f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--secondary);
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header-content {
+            position: relative;
+        }
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Desktop Navigation */
+        .desktop-nav {
+            background-color: var(--primary);
+            padding: 0.8rem 0;
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        .desktop-nav li {
+            margin: 0 1.5rem;
+        }
+        
+        .desktop-nav a {
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .desktop-nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            background: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 70%;
+            max-width: 300px;
+            background: var(--primary);
+            z-index: 999;
+            padding: 5rem 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+        }
+        
+        /* Section styles */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+        }
+        
+        /* About section */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        
+        .about-image {
+            flex: 0 0 250px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        /* Education & Skills sections */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Certifications */
+        .cert-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        /* Hobbies */
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .hobby-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .hobby-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Download button */
+        .download-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            margin-top: 1rem;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .download-button:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-image {
+                flex: 0 0 auto;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-nav-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-content {
+                padding: 1.5rem;
+            }
+            
+            .skills-grid,
+            .hobbies-container,
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile navigation toggle -->
+    <button class="mobile-nav-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="overlay"></div>
+    
+    <!-- Mobile navigation -->
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+            <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+            <li><a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
+            <li><a href="#hobbies"><i class="fas fa-heart"></i> Hobbies</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+        <div class="container header-content">
+            <img src="./pic.jpg" class="profile-picture">
+            <h1>Mohammed Harris S</h1>
+            <p>BCA Student & Aspiring Developer</p>
+        </div>
+    </header>
+    
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-content">
+                <h2>About Me</h2>
+                <div class="about-container">
+                    <div class="about-image">
+               
+                    </div>
+                    <div class="about-text">
+    <p>
+        Hi, I'm <b>Mohammed Harris</b>, a 2nd-year <b>BCA student</b> at 
+        <b>Sri Muthukumaran Arts and Science College</b>. I have a strong 
+        passion for <b>web development, programming, and problem-solving</b>, 
+        and I enjoy creating projects that bring together both design and logic.
+    </p>
+    <p>
+        I know <b>React.js</b> and <b>Node.js</b>, and I like to solve problems using <b>Python</b>. 
+        Along the way, I've also built skills in <b>HTML, CSS, SQL</b>, and I'm continuously 
+        improving my <b>JavaScript</b> knowledge through hands-on projects. My goal is to grow 
+        into a skilled <b>full-stack developer</b> while also exploring exciting areas like 
+        <b>cloud computing</b> and <b>cybersecurity</b>.
+    </p>
+</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education">
+            <div class="section-content">
+                <h2>Education</h2>
+                <ul>
+                    <li>
+                        <b>Bachelor of Computer Applications (BCA)</b><br>
+                        Sri Muthukumaran Arts and Science College – Pursuing (2nd Year)
+                    </li>
+                     <li>
+                        <b>Diploma in civil engineering </b><br>
+                        SA POLYTECHNIC COLLEGE - Completed 
+                    </li>
+                    <li>
+                        <b>Higher Secondary Education</b><br>
+                        Dawn metric higher secondary school – Completed
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-content">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fab fa-html5"></i>
+                        <h3>HTML & CSS</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <h3>Python</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-database"></i>
+                        <h3>SQL</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-js"></i>
+                        <h3>JavaScript</h3>
+                    </div>
+                     <div class="skill-item">
+                        <i class="fab fa-react"></i>
+                        <h3>React Js</h3>
+                    </div>
+                     <div class="skill-item">
+                         <div class="skill-item">
+                        <i class="fab fa-node"></i>
+                        <h3>Node Js</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Certifications Section -->
+        <section id="certifications">
+            <div class="section-content">
+                <h2>Certifications</h2>
+                <div class="cert-item">
+                    <h3>Web Development </h3>
+                    <p>IBM SkillsBuild (2024)</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Hobbies Section -->
+        <section id="hobbies">
+            <div class="section-content">
+                <h2>Hobbies & Interests</h2>
+                <p>
+                    Outside of coding, I enjoy exploring creative and fun activities.  
+                    My hobbies include:
+                </p>
+                <div class="hobbies-container">
+                    <div class="hobby-item">
+                        <i class="fas fa-futbol"></i>
+                        <h3>Sports</h3>
+                        <p>Football, Cricket</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-camera"></i>
+                        <h3>Photography</h3>
+                        <p>Nature & Urban photography</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Tech Trends</h3>
+                        <p>Exploring new technologies</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-content">
+                <h2>Contact Me</h2>
+                <p>If you'd like to connect with me, feel free to reach out:</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <a href="mailto:s.mohammedharris10@gmail.com">s.mohammedharris10@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h3>GitHub</h3>
+                            <a href="https://github.com/Mohammedharris10" target="_blank">github.com/mohammedharris10</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+            <p>&copy; 2025 Mohammed Harris . All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile navigation functionality
+        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const overlay = document.querySelector('.overlay');
+        
+        function toggleMobileNav() {
+            mobileNav.classList.toggle('active');
+            overlay.style.display = mobileNav.classList.contains('active') ? 'block' : 'none';
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        mobileNavToggle.addEventListener('click', toggleMobileNav);
+        overlay.addEventListener('click', toggleMobileNav);
+        
+        // Close mobile nav when clicking on links
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', toggleMobileNav);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
